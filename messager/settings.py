@@ -32,7 +32,8 @@ SECRET_KEY = 'django-insecure-y3pc(tl^u+4ybn9#1vn0ut!(lh=-bl(0f$tt@_-p&to3_s&xjb
 DEBUG = True
 
 ALLOWED_HOSTS = [
-
+    '0.0.0.0',
+    'vast-sierra-12902.herokuapp.com',
 ]
 
 
