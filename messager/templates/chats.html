@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% load static %}
+{% block css_add %}
+    <link rel="stylesheet" href="{% static 'chats/css/chats.css' %}">
+{% endblock %}
+{% block content %}
+<div class="panel">
+    <div class="button-flex">
+        <a href="{% url 'users:list' %}" class="btn btn-primary mb-1 ml-3 mt-1">Create dialog</a>
+        <a href="{% url 'logout' %}" class="btn btn-primary mb-1 mr-3 mt-1">Logout</a>
+    </div>
+    {% if chats.count == 0 %}
+        <div class="panel panel-body">{% translate "Нет ни одного начатого диалога" %}</div>
+    {% endif %}
+    {% for chat in chats %}
+            <a class="nav-link" href="{% url 'chats:messages' chat.id %}">
+                <ul class="list-group">
+                    <li class="chat">
+                        <div class="chat-content-item">
+                            <div class="last_message_container">
+                                {% if chat.members.all.1 is None %}
+                                    <p class="h4">Избранное</p>
+                                {% else %}
+                                    {% for u in chat.members.all %}
+                                        {% if u != user %}
+                                            <p class="h4">{{ u.username }}</p>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <p class="last_message">
+                                    {{ chat.message_set.all.last }}
+                                </p>
+                                {% if not chat.message_set.all.last.is_readed and not chat.message_set.all.last.author == user %}
+                                    <span class="rounded-circle new_message"></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+               <!--<a href="{% url 'chats:delete' chat.id %}">Delete</a>-->
+            </a>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron mt-3">
+      <h1>{{ title }}</h1>
+      {% if user.is_authenticated %}
+        <p class="lead">Hi, {{ user.username }}!</p>
+        <a class="btn btn-lg btn-primary" href="{% url 'chats:list' %}" role="button">{{ open_chat }}</a>
+        <a class="btn btn-lg btn-primary" href="{% url 'logout' %}" role="button">{{ logout }}</a>
+      {% else %}
+        <p class="lead">{{ sub_title }}</p>
+        <a class="btn btn-lg btn-primary" href="{% url 'login' %}" role="button">{{ login }}</a>
+        <a class="btn btn-lg btn-primary" href="{% url 'users:create' %}" role="button">{{ register }}</a>
+      {% endif %}
+    </div>
+</div>
+{% endblock %}

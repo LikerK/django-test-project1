@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% load static %}
+{% block css_add %}
+    <link rel="stylesheet" href="{% static 'chats/css/messages.css' %}">
+{% endblock %}
+{% block content %}
+<div class="background border rounded">
+    <div class="background-user p-1 border-bottom border-primary">
+        <a class="link back" href="{% url 'chats:list' %}"><ion-icon name="arrow-back-outline"></ion-icon></a>
+        {% for u in chat.members.all %}
+            {% if u != user %}
+                <span class="h3 mb-0">{{ u.username }}</span>
+            {% endif %}
+        {% endfor %}
+        <a class="link basket" href="{% url 'chats:delete' chat.id %}"><ion-icon name="trash-outline"></ion-icon></a>
+    </div>
+    <div class="container messages mt-2">
+        {% for message in chat.message_set.all %}
+            {% include 'message.html' with message_item=message %}
+        {% endfor %}
+    </div>
+    <form id="messages" class="mt-1 p-2 form-post" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_text button_type="submit" button_class="btn-primary" %}
+    </form>
+</div>
+
+<script>
+    const form_control = document.querySelector('.form-control');
+    form_control.setAttribute('autocomplete', 'off');
+    form_control.focus()
+
+    const messages = document.querySelector('.messages')
+    console.log(messages)
+    messages.scrollTop = messages.scrollHeight;
+</script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% load i18n %}
+{% load static %}
+{% load bootstrap4 %}
+{% block css_add %}
+    <link rel="stylesheet" href="{% static 'chats/css/message.css' %}">
+{% endblock %}
+{% block content %}
+{% load tz %}
+        {% if message_item.author.username == user.username %}
+            <div class="text-right">
+                <div class="text-dark alert alert-success p-2" role="alert">
+                    {{ message_item.message|safe }}
+                    {% if message.is_readed is True %}
+                        <ion-icon class="text-primary" name="checkmark-done-outline"></ion-icon>
+                    {% else %}
+                        <ion-icon class="text-primary" name="checkmark-outline"></ion-icon>
+                    {% endif %}
+                    <p class="text-muted mb-0 time">{{ message_item.pub_date.time }}</p>
+                </div>
+                
+            </div>
+        {% else %}
+            <div>
+                <div class="text-dark alert alert-light p-2" role="alert">
+                    {{ message_item.message|safe }}
+                    <p class="text-muted mb-0 time">{{ message_item.pub_date.time }}</p>
+                </div>
+            </div>
+        {% endif %}
+{% endblock %}
