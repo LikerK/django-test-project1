@@ -9,7 +9,7 @@
         {% if message_item.author.username == user.username %}
             <div class="text-right">
                 <div class="text-dark alert alert-success p-2" role="alert">
-                    {{ message_item.message|safe }}
+                        {{ message_item.message|safe }}
                     {% if message.is_readed is True %}
                         <ion-icon class="text-primary" name="checkmark-done-outline"></ion-icon>
                     {% else %}
