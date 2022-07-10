@@ -1,0 +1,42 @@
+.new_message{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: rgb(1, 119, 193);
+    margin: 7px;
+}
+.h4{
+    color: rgb(0, 0, 0);
+}
+
+.last_message{
+    color: rgb(75, 75, 75);
+    display: inline-block;
+    max-width: 200px;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chat{
+    display: block;
+    padding: 15px;
+    border: 2px solid rgb(157, 157, 157);
+    border-radius: 10px;
+    align-items: center;
+}
+.chat:hover{
+    border: 2px solid rgb(104, 104, 104);
+}
+.btn-delete{
+    margin: auto 0;
+}
+.chat-content-item{
+    display: flex;
+    justify-content: space-between;
+}
+.button-flex{
+    display: flex;
+    justify-content: space-between;
+}
